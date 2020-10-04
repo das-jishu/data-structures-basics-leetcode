@@ -27,4 +27,5 @@ if __name__ == "__main__":
     print(anagram('Clint Eastwood', 'Old West Action'))
     print(anagram('Coffee', 'Co ff ee'))
     print(anagram('dddddd', 'eeeeee'))
+    print(anagram('aa', 'AA'))
     
