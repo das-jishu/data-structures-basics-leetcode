@@ -14,7 +14,7 @@ def reverse(head):
         prev = cur
         cur = temp
 
-    return cur
+    return prev
 
 if __name__ == "__main__":
     a = Node(1)
