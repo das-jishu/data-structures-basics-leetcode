@@ -17,4 +17,4 @@ def mincoins(target, coins, known):
     return res
 
 if __name__ == "__main__":
-    print(mincoins(10, [1, 3, 7, 8], [None]*11))
+    print(mincoins(10, [5, 3], [None]*11))
