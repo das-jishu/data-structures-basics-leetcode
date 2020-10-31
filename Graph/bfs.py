@@ -1,5 +1,5 @@
 
-# IMPLEMENTING DFS
+# IMPLEMENTING BFS
 
 class Vertex(object):
     def __init__(self, key):
@@ -52,31 +52,31 @@ class Graph(object):
     def __contains__(self, n):
         return n in self.vertices
 
-def dfs(graph, start):
+def bfs(graph, start):
     if not graph:
         return
     visited = []
-    stack = [start]
-    while len(stack) > 0:
-        vertex = stack.pop()
+    queue = [start]
+    while len(queue) > 0:
+        vertex = queue.pop(0)
         if vertex not in visited:
             visited.append(vertex)
         for adj in vertex.connectedTo:
             if adj not in visited:
-                stack.append(adj)
+                queue.append(adj)
     return visited
 
-def recursiveDFS(q, visited):
+def recursiveBFS(q, visited):
     if len(q) == 0:
-        return visited
+        return
     
-    x = q.pop()
+    x = q.pop(0)
     if x not in visited:
         visited.append(x)
     for k in x.connectedTo:
         if k not in visited:
             q.append(k)
-    return recursiveDFS(q, visited)
+    recursiveBFS(q, visited)
 
 
 if __name__ == "__main__":
@@ -93,12 +93,12 @@ if __name__ == "__main__":
     g.addEdge(7, 8, 1)
     g.addEdge(5, 8, 1)
 
-    re = dfs(g, g.getVertex(1))
-    vis = recursiveDFS([g.getVertex(1)], [])
-
+    re = bfs(g, g.getVertex(1))
+    visited = []
+    recursiveBFS([g.getVertex(1)], visited)
     
     print("RECURSIVE:")
-    for k in vis:
+    for k in visited:
         print(k.id)
 
     print("ITERATIVE:")

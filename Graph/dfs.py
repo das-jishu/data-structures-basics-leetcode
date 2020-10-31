@@ -68,7 +68,7 @@ def dfs(graph, start):
 
 def recursiveDFS(q, visited):
     if len(q) == 0:
-        return visited
+        return
     
     x = q.pop()
     if x not in visited:
@@ -76,7 +76,7 @@ def recursiveDFS(q, visited):
     for k in x.connectedTo:
         if k not in visited:
             q.append(k)
-    return recursiveDFS(q, visited)
+    recursiveDFS(q, visited)
 
 
 if __name__ == "__main__":
@@ -94,11 +94,11 @@ if __name__ == "__main__":
     g.addEdge(5, 8, 1)
 
     re = dfs(g, g.getVertex(1))
-    vis = recursiveDFS([g.getVertex(1)], [])
-
+    visited = []
+    recursiveDFS([g.getVertex(1)], visited)
     
     print("RECURSIVE:")
-    for k in vis:
+    for k in visited:
         print(k.id)
 
     print("ITERATIVE:")
