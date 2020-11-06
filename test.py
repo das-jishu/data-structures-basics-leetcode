@@ -1,107 +1,70 @@
-
-# IMPLEMENTING DFS
-
-class Vertex(object):
-    def __init__(self, key):
-        self.id = key
-        self.connectedTo = {}
-
-    def addNeighbor(self, nbr, w):
-        self.connectedTo[nbr] = w
-
-    def getConnections(self):
-        return self.connectedTo.keys()
-
-    def getId(self):
-        return self.id
-
-    def getWeight(self, nbr):
-        return self.connectedTo[nbr]
-
-    def __str__(self):
-        return str(self.id) + " connected to " + str([x.id for x in self.connectedTo])
-
-class Graph(object):
-    def __init__(self):
-        self.vertices = {}
-        self.numVertices = 0
-
-    def addVertex(self, key):
-        self.numVertices += 1
-        temp = Vertex(key)
-        self.vertices[key] = temp
-
-    def getVertex(self, key):
-        if key in self.vertices:
-            return self.vertices[key]
-        return None
-
-    def addEdge(self, fro, to, cost=0):
-        if fro not in self.vertices:
-            self.addVertex(fro)
-        if to not in self.vertices:
-            self.addVertex(to)
-        self.vertices[fro].addNeighbor(self.vertices[to], cost)
-
-    def getVertices(self):
-        return self.vertices.keys()
-
-    def __iter__(self):
-        return iter(self.vertices.values())
-
-    def __contains__(self, n):
-        return n in self.vertices
-
-def dfs(graph, start):
-    if not graph:
-        return
-    visited = []
-    stack = [start]
-    while len(stack) > 0:
-        vertex = stack.pop()
-        if vertex not in visited:
-            visited.append(vertex)
-        for adj in vertex.connectedTo:
-            if adj not in visited:
-                stack.append(adj)
-    return visited
-
-def recursiveDFS(q, visited):
-    if len(q) == 0:
-        return visited
-    
-    x = q.pop()
-    if x not in visited:
-        visited.append(x)
-    for k in x.connectedTo:
-        if k not in visited:
-            q.append(k)
-    return recursiveDFS(q, visited)
-
-
-if __name__ == "__main__":
-    g = Graph()
-    for i in range(1, 9):
-        g.addVertex(i)
-
-    g.addEdge(1, 2, 1)
-    g.addEdge(1, 3, 1)
-    g.addEdge(3, 4, 1)
-    g.addEdge(4, 6, 1)
-    g.addEdge(4, 5, 1)
-    g.addEdge(6, 7, 1)
-    g.addEdge(7, 8, 1)
-    g.addEdge(5, 8, 1)
-
-    re = dfs(g, g.getVertex(1))
-    vis = recursiveDFS([g.getVertex(1)], [])
-
-    
-    print("RECURSIVE:")
-    for k in vis:
-        print(k.id)
-
-    print("ITERATIVE:")
-    for k in re:
-        print(k.id)
+def isValidSudoku(board) -> bool:
+        # allowed = set("1", "2", "3", "4", "5", "6", "7", "8", "9")
+        i, j = 0, 0
+        for x in board:
+            for y in x:
+                print(y,"  ", end="")
+            print()
         
+        while i < 9:
+            visited = set()
+            j = 0
+            while j < 9:
+                temp = board[i][j]
+                if temp in visited:
+                    print("FALSE IN ROW")
+                    return False
+                
+                if temp != ".":
+                    visited.add(board[i][j])
+                j += 1
+            
+            i += 1
+        
+        i = 0
+        while i < 9:
+            visited = set()
+            j = 0
+            while j < 9:
+                temp = board[j][i]
+                if temp in visited:
+                    return False
+                
+                if temp != ".":
+                    visited.add(temp)
+                j += 1
+            
+            i += 1
+            
+        i = 0
+        j = 0
+        while i < 9:
+            j = 0
+            while j < 9:
+                print("i and j == ", i, j)
+                visited = set()
+                k = i
+                l = j
+                while k < (i + 3):
+                    l = j
+                    while l < (j + 3):
+                        temp = board[k][l]
+                        print("k and l:", k, l)
+                        if temp in visited:
+                            print("FALSE IN SQUARE")
+                            return False
+
+                        if temp != ".":
+                            visited.add(temp)
+                        l += 1
+
+                    k += 1
+                    print("i = ", i, "k = ", k)
+                    
+                j += 3
+            i += 3
+            
+        return True
+                
+if __name__ == "__main__":
+    print(isValidSudoku([[".",".",".",".",".",".","5",".","."],[".",".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".",".","."],["9","3",".",".","2",".","4",".","."],[".",".","7",".",".",".","3",".","."],[".",".",".",".",".",".",".",".","."],[".",".",".","3","4",".",".",".","."],[".",".",".",".",".","3",".",".","."],[".",".",".",".",".","5","2",".","."]]))
