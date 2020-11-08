@@ -1,24 +1,22 @@
-class Solution:
-    def permuteUnique(self, nums):
-        nums.sort()
-        x = self.permute(nums)
-        return x
-    
-    def permute(self, nums):
-        if len(nums) == 1:
-            return [nums]
-
-        result = []
-        for i, x in enumerate(nums):
-            if i > 0 and x == nums[i - 1]:
-                continue
-            y = self.permute(nums[:i] + nums[i+1:])
-            for t in y:
-                t.append(x)
-                result.append(t)
-
-        return result
+def checkAnagram(s1, s2):
+    d = {}
+    for x in s1:
+        if x not in d:
+            d[x] = 1
+        else:
+            d[x] += 1
+    print(d)    
+    for x in s2:
+        if x not in d or d[x] == 0:
+            return False
+        else:
+            d[x] -= 1
+    print(d)  
+    for x in d:
+        if d[x] != 0:
+            return False
+        
+    return True
 
 if __name__ == "__main__":
-    s = Solution()
-    print(s.permuteUnique([1, 1, 2]))
+    print(checkAnagram("dee", "eed"))
