@@ -30,8 +30,8 @@ def myPow(x, n):
     if n == 0:
         return 1
     elif n < 0:
-        return 1 / self.myPow(x, abs(n))
+        return 1 / myPow(x, abs(n))
     elif n % 2 != 0:
-        return x * self.myPow(x, n-1)
+        return x * myPow(x, n-1)
     else:
-        return self.myPow(x*x, n/2)
+        return myPow(x*x, n/2)
