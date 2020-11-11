@@ -1,41 +1,25 @@
-def simplifyPath(path: str) -> str:
-        
-    if len(path) == 1:
-        return "/"
+def subset(nums):
+    if len(nums) == 0:
+        return []
     
-    res = "/"
-    path = path[1:]
-    if path[-1] != "/":
-        path += "/"
-    temp = ""
-    for x in path:
-        if x != "/":
-            temp += x
-            continue
-        else:
-            print("res:",res,"temp:", temp)
-            if temp == "" or temp == ".":
-                pass
-            elif temp == "..":
-                if res == "/":
-                    pass
-                else:
-                    t = len(res) - 2
-                    while True:
-                        if res[t] != "/":
-                            res = res[:t]
-                            t -= 1
-                        else:
-                            t -= 1
-                            break
-            else:
-                res += temp + "/"
-            temp = ""
-            
-    if len(res) > 2 and res[-1] == "/":
-        res = res[:len(res) - 1]
-        
+    if len(nums) == 1:
+        return [[], nums]
+    
+    res = []
+    #or i, x in enumerate(nums):
+    x = nums[0]
+    t = subset(nums[1:])
+    print("t:",t)
+    res.extend(t)
+    print("res:",res)
+    for y in t:
+        temp = [x]
+        """ for k in y:
+            temp.append(k) """
+        temp.extend(y)
+        res.append(temp)
+    print("res at end:", res)       
     return res
 
 if __name__ == "__main__":
-    print(simplifyPath("/a//b////c/d//././/.."))
+    print(subset([1, 2, 4]))
