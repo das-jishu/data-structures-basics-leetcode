@@ -25,6 +25,7 @@ class Solution:
         if not head or not head.next:
             return head
         
+        # dummy takes care of duplicates at the beginning
         dummy = ListNode(float('inf'), head)
         head = dummy
         parent = head
@@ -32,17 +33,26 @@ class Solution:
         
         flag = False
         while front and parent.next:
+
+            # to adjust for duplicates at the end
             if not front.next and flag:
                 parent.next = None
                 break
+
+            # duplicates at the middle
             elif front.next and front.val == front.next.val:
                 front = front.next
+                # found duplicates so setting flag
                 flag = True
-                
+
+            # reached an unique element    
             else:
+                # if duplicates were found in the earlier iteration
                 if flag:
                     front = front.next
                     flag = False
+
+                # if no duplicates in earlier iteration
                 else:
                     parent.next = front
                     parent = front
