@@ -1,25 +1,29 @@
-def subset(nums):
-    if len(nums) == 0:
-        return []
+import copy
+def exist(board, word) -> bool:
+        m = len(board)
+        n = len(board[0])
+        for i in range(m):
+            for j in range(n):
+                print("CURRENT BOARD\n", board)
+                if board[i][j] == word[0]:
+                    print("CHECKING", i, j)
+                    if check(i, j, word, copy.deepcopy(board), m, n):
+                        return True
+        return False
+        
+def check(posx, posy, st, b, m, n):
+    print("BOARD:", b, "SEARCHING:",st[0])
+    if posx not in range(m) or posy not in range(n) or b[posx][posy] == None:
+        print("Returning false")
+        return False
+    if b[posx][posy] == st[0] and len(st) == 1:
+        return True
+    if b[posx][posy] != st[0]:
+        return False
     
-    if len(nums) == 1:
-        return [[], nums]
-    
-    res = []
-    #or i, x in enumerate(nums):
-    x = nums[0]
-    t = subset(nums[1:])
-    print("t:",t)
-    res.extend(t)
-    print("res:",res)
-    for y in t:
-        temp = [x]
-        """ for k in y:
-            temp.append(k) """
-        temp.extend(y)
-        res.append(temp)
-    print("res at end:", res)       
-    return res
+    b[posx][posy] = None
+    print("b at posx posy:", b)
+    return check(posx+1, posy, st[1:], copy.deepcopy(b), m, n) or check(posx-1, posy, st[1:], copy.deepcopy(b), m, n) or check(posx, posy+1, st[1:], copy.deepcopy(b), m, n) or check(posx, posy-1, st[1:], copy.deepcopy(b), m, n)
 
 if __name__ == "__main__":
-    print(subset([1, 2, 4]))
+    print(exist([["A","B","C","E"],["S","F","E","S"],["A","D","E","E"]],"ABCESEEEFS"))
