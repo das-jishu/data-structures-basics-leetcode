@@ -21,7 +21,6 @@ Bonus point if you are able to do this using only O(n) extra space, where n is t
 class Solution:
     def minimumTotal(self, triangle) -> int:
         space = triangle[-1]
-        len_space = len(space)
         for i in range(len(triangle) - 2, -1, -1):
             for j in range(len(triangle[i])):
                 space[j] = min(space[j], space[j + 1]) + triangle[i][j]
