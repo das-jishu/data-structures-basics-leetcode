@@ -22,7 +22,7 @@ Constraints:
 0 <= strs[i].length <= 200
 strs[i] consists of only lower-case English letters. """
 
-def longestCommonPrefix(strs: List[str]) -> str:
+def longestCommonPrefix(strs) -> str:
         if len(strs) < 1:
             return ""
         if len(strs) == 1:
