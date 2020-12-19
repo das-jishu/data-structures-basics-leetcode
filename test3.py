@@ -1,10 +1,25 @@
 
-def increment(a, b):
-    a = a + 1
-    b = b + 1
-    return a + b
+def longestPalindrome(s):
+    count = [0]*26
+    for x in s:
+        count[ord(x) - 97] += 1
 
-z = 1
-w = 2
-q = increment(z, w)
-print(z,w,q)
+    res = ""
+    middle = ""
+    for i,x in enumerate(count):
+        if x == 0:
+            continue
+        if x % 2 != 0 and middle == "":
+            middle = chr(97 + i)
+        res += chr(97 + i) * (x // 2)
+
+    if middle == "":
+        res += res[::-1]
+    else:
+        res = res + middle + res[::-1]
+
+    return res
+
+if __name__ == "__main__":
+    print(longestPalindrome("ssaadsbccb"))
+    
