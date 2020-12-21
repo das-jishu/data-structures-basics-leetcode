@@ -1,16 +1,16 @@
 
-def solve(n, k, arr):
-    m = 0
-    i = 0
-    while i < n - 2:
-        t = k
-        j = i + 1
-        while j < n - 1 and t > 0:
-            t -= arr[j] - arr[i]
-            j += 1
+# declaring collatz() method
+def collatz(n) -> None:
+    # print(1) if n is 1 and stop
+    if n == 1:
+        print(1)
+    # if n is even, print n and call method recursively by n / 2
+    elif n % 2 == 0:
+        print(n)
+        collatz(n // 2)
+    # if n is odd, print n and call method recursively with 3*n+1
+    else:
+        print(n)
+        collatz(3 * n + 1)
 
-        m = max(m, j-i)
-        i += 1
-    return m
-
-print(solve(3,1,[1,2,3]))
+collatz(5)
