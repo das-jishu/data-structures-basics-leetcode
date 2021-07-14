@@ -5,7 +5,7 @@
 [![Active](http://img.shields.io/badge/Status-Active-green.svg)](https://github.com/das-jishu/data-structures-basics-leetcode)
 [![Generic badge](https://img.shields.io/badge/lang-python-yellow.svg)](https://www.python.org/)
 
-**Description:** This repo contains basic problems + solutions on data structures and algorithms. It also has an ever-growing collection of Leetcode problems which can help improve problem solving ability.
+**Description:** This repo contains basic problems + solutions on data structures and algorithms grouped by categrory. It also has an ever-growing collection of Leetcode problems which can help improve problem solving ability.
 
 ### ⭐ CONTRIBUTE!
 
